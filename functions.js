@@ -1,3 +1,31 @@
+const score = document.querySelector('#score');
+
+
+//Button functionality
+let option;
+
+const rock = document.querySelector('#Rock');
+rock.addEventListener('click', ()=>{
+  option = 'rock'
+  game();
+  return option;
+})
+
+const paper = document.querySelector('#Paper');
+paper.addEventListener('click', ()=>{
+   option = 'paper'
+   game();
+  return option;
+})
+
+const scissors = document.querySelector('#Scissors');
+scissors.addEventListener('click', ()=>{
+  option = 'scissors'
+  game();
+  return option;
+})
+
+
 function getComputerChoice() {
     let choice = Math.floor(Math.random() * 3) + 1;
   
@@ -10,7 +38,7 @@ function getComputerChoice() {
     }
   }
   
-
+// Winner funtionality
   function play(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         let outcome =  "It's a tie!";
@@ -35,37 +63,38 @@ function getComputerChoice() {
      let  computer_points = 0;
 
     //while loop checks for winner.
-    while(player_points < 3 && computer_points < 3){
+   while(player_points < 3 && computer_points < 3){
 
-       //Function calls for getComputerChoice() and play()
+       //Function calls for getComputerChoice() and playerChoice()
     let computerSelection = getComputerChoice();
-    let result = play("rock", computerSelection);
+    let result = play(option, computerSelection);
 
     //if statements to check for current winner and overall winner
       //check if player has won 
       if(result ===( "You won! ")){
         player_points++
-        console.log("You have: " + player_points + " points")
+        score.textContent = "You have: " + player_points + " points";
         //check is player is overall winner 
         if(player_points >= 3){
-            console.log("You WIN!")
+           score.textContent = "You WIN!";
         }
       }
       //check if computer is current winner 
       else if (result === ("Computer won! ")){
        computer_points++
-        console.log("Computer has: " + computer_points + " points")
+        score.textContent = "Computer has: " + computer_points + " points";
         //check if computer is overall winner 
         if(computer_points >= 3){
-            console.log("COMPUTER WINS!")
+            score.textContent = "COMPUTER WINS!";
         }
       }
       //else statement for tie
       else{
-        console.log("Zero points for y'all")
+        score.textContent = "Zero points for y'all";
       }
     }
   }
 
+
+  
  
-  game()
